@@ -4,8 +4,7 @@ const app = express()
 const { asyNewFolder, asyRemoveFolder, asyResizeImage } = require("./Express/File")
 
 
-asyResizeImage("Hello","cait-sm.jpg","cait-bg.jpg",2000,2000)
- 
+asyNewFolder("Hello")  
 
 const PORT = process.env.PORT || 5000
 
