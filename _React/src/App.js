@@ -10,13 +10,13 @@ function App() {
   function PostFile(file) {
     const form = new FormData()
     form.append("file", file)
-    fetch("http://localhost:5000/", {
+    fetch("https://upload999.herokuapp.com/", {
       method: "POST",
       body: form
     }).then(res=>res.json())
     .then(res=>{
 
-      setUrl("http://localhost:5000/Hello2/"+res.newFileName)
+      setUrl("https://upload999.herokuapp.com/Hello2/"+res.newFileName)
     })
   }
 
