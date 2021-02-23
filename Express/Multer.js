@@ -1,4 +1,5 @@
 const multer = require("multer")
+const {asyNewFolder, asyResizeImage} = require("./File")
 
 function fileFilter(req, file, cb) {
   if(file.mimetype === 'image/jpeg' ||
@@ -9,9 +10,12 @@ function fileFilter(req, file, cb) {
   cb(new Error("Oops! File type is not allowed"), false)
 }
 
-function mwAddFile(req, res, next) {
+async function mwAddFile(req, res, next) {
+
+  await asyNewFolder("Hello2")
 
   const storage = multer.diskStorage({
+
     destination: function(req, file, cb) {
       cb(null, "Express/TempFolder/Hello2")
     },
@@ -27,10 +31,15 @@ function mwAddFile(req, res, next) {
     },
     fileFilter: fileFilter
   })
-  upload.single("filex")(req, res, (err)=>{
+  upload.single("file")(req, res, async (err)=>{
     if(err) {
       return res.json({ok:false, error: err.message})
     }
+    const name = req.file.originalname.split(".")[0]
+    const ext = req.file.originalname.split(".")[1]
+
+    await asyResizeImage("Hello2", req.file.originalname, name+"-sm."+ext, 200, 200)
+    req.newFileName =  name+"-sm."+ext
     next()
   })
 }
