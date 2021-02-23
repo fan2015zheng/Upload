@@ -1,3 +1,4 @@
 _React/node_modules
+_React/build
 node_modules
 .env

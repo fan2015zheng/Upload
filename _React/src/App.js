@@ -33,7 +33,7 @@ function App() {
 
       <br/><br/>
 
-      <img src={url} />
+      <img src={url} alt="test images"/>
     </div>
   </>)
 }
